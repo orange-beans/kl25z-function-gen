@@ -1,4 +1,5 @@
 #include "mbed.h"
+#include <Flasher.h>
 // #include "USBMouse.h"
 //
 // USBMouse mouse(ABS_MOUSE);
@@ -27,26 +28,9 @@ void toggleLED(void);
 void runningLED(void);
 void flash(int n);
 
-// Study create a Flasher class
-class Flasher {
-private:
-  DigitalOut _pin;
-
-public:
-  Flasher(PinName pin) : _pin(pin) {
-
-  }
-
-  void flash(int n) {
-    for(int i=0; i<n*2; i++) {
-      _pin = !_pin;
-      wait(0.2);
-    }
-  }
-};
 
 // Instanlize
-Flasher flash1(LED2);
+Flasher flash1(LED2, 2);
 Flasher flash2(LED3);
 
 int main() {
@@ -72,7 +56,7 @@ int main() {
   button2.rise(&toggleLED);
   //runningLED();
 
-  flash1.flash(5);
+  flash1.flash();
   flash2.flash(2);
 
   while(true) {
